@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-app-bar fixed app dark>
+    <v-app-bar style="background-color:#fff" fixed app>
       <logo_Evergame class="logo"/>
-      <div class="company">Evergame</div>
+      <div class="company">Sakuranime</div>
     </v-app-bar>
-    <v-content>
+    <v-content style="background-color:#f5f5f5">
       <v-container>
         <nuxt />
       </v-container>
@@ -33,17 +33,17 @@
     width:55px;
     height:auto;
     margin-right:20px;
-    margin-left:17%;
+    margin-left:11%;
   }
 
   .company {
     font-size:20px;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1024px) {
     .logo {
       width:50px;
-      margin-left:0;
+      margin-left:0!important;
     }
   }
 

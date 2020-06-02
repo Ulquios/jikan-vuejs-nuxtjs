@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       datas: [],
-      intro: '50 TOP ANIMES ON MYANIMELIST TODAY',
+      intro: '50 TOP ANIME TITLES ON MYANIMELIST',
       animeTitle: ''
     }
   },
@@ -64,7 +64,7 @@ export default {
           this.intro = 'POPULAR GAMES FOUND FOR "' + this.animeTitle + '"'
           // If the given name is empty reset message
           if (this.animeTitle === "") {
-            this.intro = "50 TOP ANIMES ON MYANIMELIST TODAY"
+            this.intro = "50 TOP ANIME TITLES ON MYANIMELIST"
           }
           this.datas = data
         })

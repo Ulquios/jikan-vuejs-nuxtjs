@@ -1,21 +1,15 @@
 <template>
   <img
     class="logo"
-    alt="Evergame Logo"
-    src="~/assets/evernote.png">
+    alt="Sakuranime Logo"
+    src="~/assets/sakura2.png">
 </template>
 
 <script>
     export default {
-        name: "Logo_Evergame"
+        name: "logo_sakuranime"
     }
 </script>
 
 <style scoped>
-
-  .logo {
-    width:180px;
-    height:auto;
-  }
-
 </style>
