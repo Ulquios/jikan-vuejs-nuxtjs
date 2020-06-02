@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout align-start row>
       <v-flex xs12 sm6 md3>
-        <v-text-field v-model="gameName" label="Game name" solo></v-text-field>
+        <v-text-field v-model="animeTitle" label="Anime Title" solo></v-text-field>
       </v-flex>
       <v-flex xs12 sm6 md3>
         <v-btn color="accent" style="height:48px;margin-top:0;" v-on:click="searchGames()">Search</v-btn>
@@ -13,55 +13,14 @@
 
     <v-container fluid grid-list-md px-0>
       <v-layout row wrap>
-
-        <v-flex xs12 sm8 md6 lg4 v-if="datas.length < 1">
-          <a style="text-decoration: none;" target="_blank">
-            <v-card class="card hvr-grow" pa-10>
-              <v-img  style="height:200px" class="img" src="https://media.comicbook.com/2019/01/mk11-1154821.jpeg"></v-img>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0">Mortal kombat 11</h3>
-                  <div>A very good fighting game</div>
-                </div>
-              </v-card-title>
-            </v-card>
-          </a>
-        </v-flex>
-        <v-flex xs12 sm8 md6 lg4 v-if="datas.length < 1">
-          <a style="text-decoration: none;" target="_blank">
-            <v-card class="card hvr-grow" pa-10>
-              <v-img  style="height:200px" class="img" src="https://media.comicbook.com/2019/01/mk11-1154821.jpeg"></v-img>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0">Mortal kombat 11</h3>
-                  <div>A very good fighting game</div>
-                </div>
-              </v-card-title>
-            </v-card>
-          </a>
-        </v-flex>
-        <v-flex xs12 sm8 md6 lg4 v-if="datas.length < 1">
-          <a style="text-decoration: none;" target="_blank">
-            <v-card class="card hvr-grow" pa-10>
-              <v-img  style="height:200px" class="img" src="https://media.comicbook.com/2019/01/mk11-1154821.jpeg"></v-img>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0">Mortal kombat 11</h3>
-                  <div>A very good fighting game</div>
-                </div>
-              </v-card-title>
-            </v-card>
-          </a>
-        </v-flex>
-
-        <v-flex xs12 sm8 md6 lg4 v-for="data in datas" v-bind:key="data.mal_id">
+        <v-flex xs6 sm6 md6 lg2 xl2 v-for="data in datas" v-bind:key="data.mal_id">
           <a style="text-decoration: none;" :href="data.url" target="_blank">
             <v-card class="card hvr-grow" pa-10>
               <v-img v-if="data.image_url" class="img" :src="data.image_url"></v-img>
-              <div v-else style="height:200px"></div>
+              <div v-else style="height:274px"></div>
               <v-card-title primary-title>
                 <div>
-                  <h3 class="headline mb-0">{{ data.title }}</h3>
+                  <div class="title">{{ data.title }}</div>
                   <!--<div v-if="data.summary">{{ limitSummaryLenght(data.summary) }}</div>-->
                 </div>
               </v-card-title>
@@ -81,8 +40,8 @@ export default {
   data () {
     return {
       datas: [],
-      intro: '30 MOST POPULAR GAMES ON IGDB TODAY',
-      gameName: ''
+      intro: '50 TOP ANIMES ON MYANIMELIST TODAY',
+      animeTitle: ''
     }
   },
   created () {
@@ -93,7 +52,6 @@ export default {
     getTopAnimes: function () {
       APIClient.getTopAnimes()
         .then((data) => {
-            console.log(data);
           this.datas = data
         })
         .catch(err => {
@@ -101,21 +59,17 @@ export default {
     },
     // Get games with a specific name
     searchGames: function () {
-      APIClient.searchGames(this.gameName)
+      APIClient.searchGames(this.animeTitle)
         .then((data) => {
-          this.intro = 'POPULAR GAMES FOUND FOR "' + this.gameName + '"'
+          this.intro = 'POPULAR GAMES FOUND FOR "' + this.animeTitle + '"'
           // If the given name is empty reset message
-          if (this.gameName === "") {
-            this.intro = "30 MOST POPULAR GAMES ON IGDB TODAY"
+          if (this.animeTitle === "") {
+            this.intro = "50 TOP ANIMES ON MYANIMELIST TODAY"
           }
           this.datas = data
         })
         .catch(err => {
         })
-    },
-    // Create dynamic img url to display game's cover
-    getUrlImg: function (id) {
-      return ('https://images.igdb.com/igdb/image/upload/t_screenshot_med/' + id + '.jpg')
     },
     // Cut the summary of a game if > 300 characters
     limitSummaryLenght: function (summary) {
@@ -141,6 +95,16 @@ export default {
 
   .card:hover {
     cursor:pointer;
+  }
+
+  .title {
+    font-size: 1rem!important;
+    line-height: 1.5rem;
+    word-break:normal;
+  }
+
+  .img {
+    height: 281px;
   }
 
   /* Grow animation for card*/
