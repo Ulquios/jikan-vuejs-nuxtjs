@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout align-start row>
+    <v-layout>
       <v-flex xs12 sm6 md3>
         <v-text-field v-model="animeTitle" label="Anime Title" solo></v-text-field>
       </v-flex>
@@ -12,17 +12,14 @@
     <div class="intro">{{ intro }}</div>
 
     <v-container fluid grid-list-md px-0>
-      <v-layout row wrap>
-        <v-flex xs6 sm6 md6 lg2 xl2 v-for="data in datas" v-bind:key="data.mal_id">
+      <v-layout row wrap class="justify-space-around">
+        <v-flex xs6 sm6 md6 lg2 xl2 v-for="data in datas" v-bind:key="data.mal_id" style="padding:0!important;margin:15px 10px;">
           <a style="text-decoration: none;" :href="data.url" target="_blank">
             <v-card class="card hvr-grow" pa-10>
               <v-img v-if="data.image_url" class="img" :src="data.image_url"></v-img>
               <div v-else style="height:274px"></div>
-              <v-card-title primary-title>
-                <div>
-                  <div class="title">{{ data.title }}</div>
-                  <!--<div v-if="data.summary">{{ limitSummaryLenght(data.summary) }}</div>-->
-                </div>
+              <v-card-title class="card-title" primary-title>
+                <div class="title">{{ limitTextLenght(data.title, 37) }}</div>
               </v-card-title>
             </v-card>
           </a>
@@ -61,7 +58,7 @@ export default {
     searchGames: function () {
       APIClient.searchGames(this.animeTitle)
         .then((data) => {
-          this.intro = 'POPULAR GAMES FOUND FOR "' + this.animeTitle + '"'
+          this.intro = 'ANIME FOUND FOR "' + this.animeTitle + '"'
           // If the given name is empty reset message
           if (this.animeTitle === "") {
             this.intro = "50 TOP ANIME TITLES ON MYANIMELIST"
@@ -71,12 +68,10 @@ export default {
         .catch(err => {
         })
     },
-    // Cut the summary of a game if > 300 characters
-    limitSummaryLenght: function (summary) {
-      console.log(summary)
-      if (summary.length > 300)
-        return (summary.substring(0, 300) + '...')
-      return summary
+    limitTextLenght: function (text, size) {
+      if (text.length > size)
+        return (text.substring(0, size) + '...');
+      return text
     }
   }
 }
@@ -97,10 +92,16 @@ export default {
     cursor:pointer;
   }
 
+  .card-title {
+    padding:12px;
+  }
+
   .title {
-    font-size: 1rem!important;
-    line-height: 1.5rem;
+    font-size: 0.85rem!important;
+    line-height: 1.2rem;
     word-break:normal;
+    text-align:center;
+    width:100%;
   }
 
   .img {
