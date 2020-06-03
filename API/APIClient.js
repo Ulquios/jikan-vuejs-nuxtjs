@@ -17,4 +17,15 @@ export default class APIClient {
       });
     })
   }
+
+  static searchAnime (animeTitle) {
+    return new Promise((resolve, reject) => {
+      jikanjs.search('anime', animeTitle).then((response) => {
+        resolve(response.results);
+      }).catch((err) => {
+        console.error(err); // in case a error happens
+        reject(err);
+      });
+    })
+  }
 }

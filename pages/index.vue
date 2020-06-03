@@ -5,11 +5,14 @@
         <v-text-field v-model="animeTitle" label="Anime Title" solo></v-text-field>
       </v-flex>
       <v-flex xs12 sm6 md3>
-        <v-btn color="accent" style="height:48px;margin-top:0;" v-on:click="searchGames()">Search</v-btn>
+        <v-btn color="accent" style="height:48px;margin-top:0;" v-on:click="searchAnime()">Search</v-btn>
       </v-flex>
     </v-layout>
 
-    <div class="intro">{{ intro }}</div>
+    <v-layout row wrap style="margin-left:0">
+      <div class="intro">{{ intro }}</div>
+      <v-btn v-if="isSearch" v-on:click="getTopAnimes()" text small color="error" style="margin-left:5px;font-size:15px;"><i class="fas fa-times-circle"></i></v-btn>
+    </v-layout>
 
     <v-container fluid grid-list-md px-0>
       <v-layout row wrap>
@@ -38,35 +41,44 @@ export default {
     return {
       datas: [],
       intro: '50 TOP ANIME TITLES ON MYANIMELIST',
-      animeTitle: ''
+      animeTitle: '',
+      isSearch: false,
     }
   },
   created () {
     this.getTopAnimes();
   },
   methods: {
-    // Get games from IGDB's API
+    // Get top anime
     getTopAnimes: function () {
       APIClient.getTopAnimes()
         .then((data) => {
-          this.datas = data
+            this.intro = "50 TOP ANIME TITLES ON MYANIMELIST";
+            this.isSearch = false;
+            this.datas = data
         })
         .catch(err => {
         })
     },
-    // Get games with a specific name
-    searchGames: function () {
-      APIClient.searchGames(this.animeTitle)
-        .then((data) => {
-          this.intro = 'ANIME FOUND FOR "' + this.animeTitle + '"'
-          // If the given name is empty reset message
-          if (this.animeTitle === "") {
-            this.intro = "50 TOP ANIME TITLES ON MYANIMELIST"
-          }
-          this.datas = data
-        })
-        .catch(err => {
-        })
+    // search specific anime title
+    searchAnime: function () {
+        if (this.animeTitle.length < 3) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Anime title must be at least 3 letters'
+            });
+            this.getTopAnimes();
+        }
+        else {
+            APIClient.searchAnime(this.animeTitle)
+                .then((data) => {
+                    this.intro = 'ANIME FOUND FOR "' + this.animeTitle + '"';
+                    this.isSearch = true;
+                    this.datas = data
+                })
+                .catch(err => {
+                })
+        }
     },
     limitTextLenght: function (text, size) {
       if (text.length > size)
@@ -106,6 +118,14 @@ export default {
 
   .img {
     height: 281px;
+  }
+
+  .swal2-popup {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif!important;
+  }
+
+  body {
+    padding-right:0!important;
   }
 
   /* Grow animation for card*/

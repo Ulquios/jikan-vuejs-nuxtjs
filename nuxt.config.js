@@ -15,6 +15,10 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://cdn.jsdelivr.net/npm/sweetalert2@9'},
+      { src: 'https://kit.fontawesome.com/24a77aeb13.js'}
     ]
   },
   /*
@@ -25,6 +29,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/global.css'
   ],
   /*
   ** Plugins to load before mounting the App
