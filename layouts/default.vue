@@ -9,6 +9,10 @@
         <nuxt />
       </v-container>
     </v-content>
+    <v-footer style="background-color:white">
+      <v-spacer></v-spacer>
+      <div>Théo Vielmas &copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
   </v-app>
 </template>
 
