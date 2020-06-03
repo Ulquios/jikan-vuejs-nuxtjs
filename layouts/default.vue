@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar style="background-color:#fff" fixed app>
+    <v-app-bar style="background-color:#fff;z-index:40" fixed app>
       <logo_Evergame class="logo"/>
       <div class="company">Sakuranime</div>
     </v-app-bar>

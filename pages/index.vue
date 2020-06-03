@@ -12,8 +12,8 @@
     <div class="intro">{{ intro }}</div>
 
     <v-container fluid grid-list-md px-0>
-      <v-layout row wrap class="justify-space-around">
-        <v-flex xs6 sm6 md6 lg2 xl2 v-for="data in datas" v-bind:key="data.mal_id" style="padding:0!important;margin:15px 10px;">
+      <v-layout row wrap>
+        <v-flex xs6 sm6 md6 lg2 xl2 v-for="data in datas" v-bind:key="data.mal_id">
           <a style="text-decoration: none;" :href="data.url" target="_blank">
             <v-card class="card hvr-grow" pa-10>
               <v-img v-if="data.image_url" class="img" :src="data.image_url"></v-img>
@@ -93,7 +93,7 @@ export default {
   }
 
   .card-title {
-    padding:12px;
+    padding:8px;
   }
 
   .title {
@@ -121,12 +121,14 @@ export default {
     transition-property: transform;
   }
   .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    border:0!important;
+    border-radius: 0!important;
     z-index:20;
-    -webkit-box-shadow: 0px 0px 46px 7px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 46px 7px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 46px 7px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.75);
   }
 
 </style>
