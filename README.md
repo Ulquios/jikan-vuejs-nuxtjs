@@ -1,8 +1,8 @@
 # anime-web-jikan
 
-> Example project of a web app using [JIKAN API](https://api.igdb.com/)
+> Example project of a web app using [JIKAN API](https://jikan.moe/)
 
-> Display top anime from Myanimelist or search for a specific one.
+> Display top anime from [Myanimelist](https://myanimelist.net/) or search for a specific one.
 
 ![alt text](https://cdn.discordapp.com/attachments/570620252355035136/717723043379806218/unknown.png)
 
