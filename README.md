@@ -1,4 +1,4 @@
-# anime-web-jikan
+# Jikan-vuejs-nuxtjs
 
 > Example project of a web app using [JIKAN API](https://jikan.moe/)
 
